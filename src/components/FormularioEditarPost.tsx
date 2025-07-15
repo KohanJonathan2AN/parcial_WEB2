@@ -1,11 +1,26 @@
-import { useState } from 'react';
+import { useState , useEffect} from 'react';
 import {useNavigate} from 'react-router-dom';
 import axios from 'axios';
+import { useParams } from 'react-router';
 
-export const CrearPost = () => {
+export const EditarPost = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
+  const {id} = useParams();
   const navigate = useNavigate();
+
+  useEffect(() => {
+        const fetchPosts = async () => {
+            try {
+                const res = await axios.get(`http://localhost:2565/posts/${id}`);
+                setTitle(res.data.data.title);
+                setContent(res.data.data.content);
+            } catch (error) {
+                console.error('Error al recuperar los posts', error);
+            }
+        };
+        fetchPosts();
+    }, [id]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -15,21 +30,21 @@ export const CrearPost = () => {
         console.error('Usuario no registrado');
         return;
       }
-      const res = await axios.post('http://localhost:2565/posts', {
+      const res = await axios.put(`http://localhost:2565/posts/${id}`, {
         title,
         content,
         authorId: usuarioId,
       });
-      console.log('Post creado:', res.data);
+      console.log('Post modificado:', res.data);
       navigate('/ListaDePosts');
     }
     catch (error) {
-        console.error('Error al crear el post:', error);
+        console.error('Error al modificar el post:', error);
     }
   };
   return (
     <div>
-      <h1>Crear Post</h1>
+      <h1>Editar Post</h1>
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="title">Título</label>
@@ -39,7 +54,7 @@ export const CrearPost = () => {
           <label htmlFor="content">Contenido</label>
           <textarea id="content" value={content} onChange={(e) => setContent(e.target.value)} required/>
         </div>
-        <button type="submit">Crear Post</button>
+        <button type="submit">Editar Post</button>
       </form>
     </div>
   );

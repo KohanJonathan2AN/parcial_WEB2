@@ -1,7 +1,9 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import { FormularioRegistro } from "./components/FormularioRegistro";
-import { RecuperacionPosts} from "./components/FormularioPost";
-import { CrearPost } from "./components/CrearPost";
+import { RecuperacionPosts} from "./components/FormularioListaPosts";
+import { CrearPost } from "./components/FormularioPost";
+import { RecuperacionRegistros} from "./components/FormularioListaRegistros";
+import { EditarPost} from "./components/FormularioEditarPost";
 
 
 function App() {
@@ -11,6 +13,8 @@ function App() {
         <Route path="/Registro" element={<FormularioRegistro />} />
         <Route path="/ListaDePosts" element={<RecuperacionPosts />} />
         <Route path="/CrearPost" element={<CrearPost />} />
+        <Route path="/ListaRegistros" element={<RecuperacionRegistros />} />
+        <Route path="/EditarPost/:id" element={<EditarPost />} />
       </Routes>
     </BrowserRouter>
   );

@@ -1,54 +1,46 @@
-import {Link} from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import {useNavigate} from 'react-router-dom';
 import axios from 'axios';
 
-type Post = {
-    _id: string;
-    title: string;
-    content: string;
-    author: {
-        name: string;
-        email: string;
-    };
-    likes: {
-        name: string;
-        email: string;
-    }[];
-};
+export const CrearPost = () => {
+  const [title, setTitle] = useState('');
+  const [content, setContent] = useState('');
+  const navigate = useNavigate();
 
-export const RecuperacionPosts = () => {
-    const [posts, setPosts] = useState<Post[]>([]);
-
-    useEffect(() => {
-        const fetchPosts = async () => {
-            try {
-                const res = await axios.get('http://localhost:2565/posts');
-                console.log('Posts recuperados:', res.data);
-                setPosts(res.data.data);
-            } catch (error) {
-                console.error('Error al recuperar los posts', error);
-            }
-        };
-        fetchPosts();
-    }, []);
-
-    return (
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      const usuarioId = localStorage.getItem('usuarioID');
+      if (!usuarioId) {
+        console.error('Usuario no registrado');
+        return;
+      }
+      const res = await axios.post('http://localhost:2565/posts', {
+        title,
+        content,
+        authorId: usuarioId,
+      });
+      console.log('Post creado:', res.data);
+      navigate('/ListaDePosts');
+    }
+    catch (error) {
+        console.error('Error al crear el post:', error);
+    }
+  };
+  return (
+    <div>
+      <h1>Crear Post</h1>
+      <form onSubmit={handleSubmit}>
         <div>
-            <h1>Lista de Posts</h1>
-            <Link to="/CrearPost">Crear Post</Link>
-            <ul>
-                {posts.map((post) => (
-                    <li>
-                        <div key={post._id}>
-                            <h2>{post.title}</h2>
-                            <p>{post.content}</p>
-                            <p>Autor: {post.author.name} ({post.author.email})</p>
-                            <p>Likes: {post.likes.length}</p>
-                        </div>
-                        <button>Me gusta</button>
-                    </li>
-                ))}
-            </ul>
+          <label htmlFor="title">Título</label>
+          <input id="title" type="text" value={title} onChange={(e) => setTitle(e.target.value)} required/>
         </div>
-    );
-}
+        <div>
+          <label htmlFor="content">Contenido</label>
+          <textarea id="content" value={content} onChange={(e) => setContent(e.target.value)} required/>
+        </div>
+        <button type="submit">Crear Post</button>
+      </form>
+    </div>
+  );
+};
