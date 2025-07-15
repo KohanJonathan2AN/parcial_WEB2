@@ -35,7 +35,7 @@ export const FormularioRegistro = () => {
       localStorage.setItem('usuarioNombre', data.name);
       localStorage.setItem('usuarioEmail', data.email);
       console.log('Se ha registrado el usuario:', res.data);
-      navigate('/paginaDePosts');
+      navigate('/ListaDePosts');
     } catch (error) {
       console.error('Error al registrar:', error);
     }
