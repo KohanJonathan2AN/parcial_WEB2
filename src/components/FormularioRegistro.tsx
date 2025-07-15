@@ -28,10 +28,9 @@ export const FormularioRegistro = () => {
   });
 
   const onSubmit = async (data: RegistroIngreso) => {
-    try {
-      
+    try { 
       const res = await axios.post('http://localhost:2565/users', data);
-      localStorage.setItem('usuarioID', res.data._id);
+      localStorage.setItem('usuarioID', res.data.data._id);
       localStorage.setItem('usuarioNombre', data.name);
       localStorage.setItem('usuarioEmail', data.email);
       console.log('Se ha registrado el usuario:', res.data);
