@@ -40,7 +40,7 @@ export const RecuperacionRegistros = () => {
     return (
         <div>
             <h1>Lista de Registros</h1>
-            <ul>
+            <ul className='lista'>
                 {registros.map((registro) => (
                     <li key={registro._id}>
                         <p>Nombre: {registro.name}</p>

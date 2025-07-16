@@ -1,0 +1,38 @@
+/* Navbar container */
+nav {
+  background: linear-gradient(90deg, #4e54c8 0%, #8f94fb 100%);
+  padding: 0.5rem 2rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+/* Navbar list */
+nav ul {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;;
+  gap: 2rem;
+  margin: 0;
+  padding: 0;
+}
+
+/* Navbar items */
+nav ul li {
+  display: inline-block;
+}
+
+/* Navbar links */
+nav ul li a {
+  text-decoration: none;
+  color: #fff;
+  font-weight: 500;
+  font-size: 1.1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: background 0.2s, color 0.2s;
+}
+
+nav ul li a:hover,
+nav ul li a.active {
+  background: rgba(255,255,255,0.18);
+}

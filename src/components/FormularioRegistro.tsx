@@ -46,7 +46,7 @@ export const FormularioRegistro = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>
           <label htmlFor="name">Nombre</label>
-          <input id="name" {...register('name')} />
+          <input id="name" type="text" {...register('name')} />
           {errors.name && <p>{errors.name.message}</p>}
         </div>
         <div>

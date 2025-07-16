@@ -72,8 +72,8 @@ const PonerSacarMeGusta = async (postId: string) => {
     return (
         <div>
             <h1>Lista de Posts</h1>
-            <button><Link to="/CrearPost" style={{color: 'red'}}>Crear Post</Link></button>
-            <ul>
+            <button><Link to="/CrearPost"style={{color: 'yellow'}}>Crear Post</Link></button>
+            <ul className='lista'>
                 {posts.map((post) => (
                     <li key={post._id}>
                         <div>
@@ -82,7 +82,7 @@ const PonerSacarMeGusta = async (postId: string) => {
                             <p>Autor: {post.author.name} ({post.author.email})</p>
                             <p>Likes: {post.likes.length}</p>
                         </div>
-                        <button><Link to={`/EditarPost/${post._id}`} >Editar Post</Link></button>
+                        <button><Link to={`/EditarPost/${post._id}`}style={{color: 'yellow'}} >Editar Post</Link></button>
                         <button onClick={() => PonerSacarMeGusta(post._id)}>
                             {usuarioLeDioMeGusta(post) ? 'Quitar Me gusta' : 'Me gusta'}
                         </button>

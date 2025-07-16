@@ -4,11 +4,13 @@ import { RecuperacionPosts} from "./components/FormularioListaPosts";
 import { CrearPost } from "./components/FormularioPost";
 import { RecuperacionRegistros} from "./components/FormularioListaRegistros";
 import { EditarPost} from "./components/FormularioEditarPost";
+import { Navbar } from "./components/NavBar/NavBar";
 
 
 function App() {
   return (
     <BrowserRouter>
+      <Navbar />
       <Routes>
         <Route path="/Registro" element={<FormularioRegistro />} />
         <Route path="/ListaDePosts" element={<RecuperacionPosts />} />
