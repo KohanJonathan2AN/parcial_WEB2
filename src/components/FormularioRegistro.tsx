@@ -1,6 +1,6 @@
 import {useForm} from 'react-hook-form';
 import {useNavigate} from 'react-router-dom';
-import { joiResolver} from '@hookform/resolvers/joi';
+import {joiResolver} from '@hookform/resolvers/joi';
 import joi from 'joi';
 import axios from 'axios';
 
